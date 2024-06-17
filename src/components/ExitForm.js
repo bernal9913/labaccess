@@ -7,7 +7,7 @@ const ExitForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const exitTime = new Date().toLocaleString('en-US', { timeZone: 'UTC-7' });
+        const exitTime = new Date().getTime()
 
         try {
             const entries = await db.collection('entries')

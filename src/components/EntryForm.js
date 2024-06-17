@@ -1,6 +1,6 @@
-// src/components/EntryForm.js
 import React, { useState } from 'react';
 import { db } from '../firebase';
+import { doc, setDoc} from "firebase/firestore"
 
 const EntryForm = () => {
     const [name, setName] = useState('');
@@ -9,10 +9,11 @@ const EntryForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const entryTime = new Date().toLocaleString('en-US', { timeZone: 'UTC-7' });
+        const entryTime = new Date().getTime();
+        const id = new Date().toISOString(); // Genera un ID basado en la fecha actual en formato ISO
 
         try {
-            await db.collection('entries').add({
+            await setDoc(doc(db, 'entries', id), {
                 name: name || code,
                 reason,
                 entryTime

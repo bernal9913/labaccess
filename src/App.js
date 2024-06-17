@@ -1,31 +1,24 @@
 //import logo from './logo.svg';
 import logo from './ESCUDO-COLOR.png'
 import './App.css';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import EntryForm from "./components/EntryForm";
+import ExitForm from "./components/ExitForm";
+import Home from "./components/home";
+import React from "react";
 
 function App() {
-  return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1>Laboratorio de Conducta Experimental</h1>
-          <p>Página de prueba para demostrar el diseño del Laboratorio de Conducta Experimental.</p>
-        </header>
-        <main className="App-main">
-          <section className="App-section">
-            <h2>Nuestro Compromiso</h2>
-            <p>Brindar servicios y productos de calidad para nuestros clientes.</p>
-            <a href="#mas-info" className="App-btn">Más Información</a>
-          </section>
-          <section id="mas-info" className="App-info">
-            <h2>¿Quiénes Somos?</h2>
-            <p>Somos un laboratorio dedicado a estudios avanzados en conducta humana y animal...</p>
-          </section>
-        </main>
-        <footer className="App-footer">
-          <p>&copy; 2024 Universidad de Sonora. All rights reserved.</p>
-        </footer>
-      </div>
-  );
+    return (
+        <Router>
+            <div className="App">
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/entryform" element={<EntryForm />} />
+                    <Route path="/exitform" element={<ExitForm />} />
+                </Routes>
+            </div>
+        </Router>
+    );
 }
 
 export default App;

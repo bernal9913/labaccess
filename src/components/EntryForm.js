@@ -29,8 +29,9 @@ const EntryForm = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h2>Registro de Entrada</h2>
+        <main className="main">
+        <form className="form" onSubmit={handleSubmit}>
+            <h2 className="h2" >Registro de Entrada</h2>
             <div className="div">
             <label className='text' for="fname">Nombre</label>
                 <input className="cuadro-text" type="text" id="fname" name="firstname" placeholder="Ingresa tu nombre" value={name} onChange={(e) => setName(e.target.value)} />
@@ -45,6 +46,7 @@ const EntryForm = () => {
             </div >
             <button type="submit" className="boton">Registrar</button>
         </form>
+        </main>
     );
 };
 

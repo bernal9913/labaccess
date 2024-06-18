@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from "../ESCUDO-COLOR.png";
 import EntryForm from './EntryForm';
+import { Link } from 'react-router-dom';
 const home  = () => {
     return (
         <div className="App">
@@ -13,7 +14,7 @@ const home  = () => {
                 <section className="App-section">
                     <h2>Nuestro Compromiso</h2>
                     <p>Brindar servicios y productos de calidad para nuestros clientes.</p>
-                    <a href="#mas-info" className="App-btn">Más Información</a>
+                    <Link to="/Registro" className="App-btn">Registro de Entrada</Link>
                 </section>
                 <section id="mas-info" className="App-info">
                     <h2>¿Quiénes Somos?</h2>
@@ -23,7 +24,6 @@ const home  = () => {
             <footer className="App-footer">
                 <p>&copy; 2024 Universidad de Sonora. All rights reserved.</p>
             </footer>
-            <EntryForm />
         </div>
             
     );

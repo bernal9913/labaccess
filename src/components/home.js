@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from "../ESCUDO-COLOR.png";
+import EntryForm from './EntryForm';
 const home  = () => {
     return (
         <div className="App">
@@ -22,7 +23,9 @@ const home  = () => {
             <footer className="App-footer">
                 <p>&copy; 2024 Universidad de Sonora. All rights reserved.</p>
             </footer>
+            <EntryForm />
         </div>
+            
     );
 }
 export default home;

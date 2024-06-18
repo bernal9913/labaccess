@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { db } from '../firebase';
 import { doc, setDoc} from "firebase/firestore"
+import '../EntryForm.css';
 
 const EntryForm = () => {
     const [name, setName] = useState('');
@@ -30,19 +31,19 @@ const EntryForm = () => {
     return (
         <form onSubmit={handleSubmit}>
             <h2>Registro de Entrada</h2>
-            <div>
-                <label>Nombre</label>
-                <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+            <div className="div">
+            <label className='text' for="fname">Nombre</label>
+                <input className="cuadro-text" type="text" id="fname" name="firstname" placeholder="Ingresa tu nombre" value={name} onChange={(e) => setName(e.target.value)} />
             </div>
-            <div>
-                <label>Razón de Entrada</label>
-                <input type="text" value={reason} onChange={(e) => setReason(e.target.value)} />
+            <div className="div">
+                <label className='text' for="reason">Razón de Entrada</label>
+                <input className="cuadro-text" type="text" id="reason" name="razon" placeholder="Ingresa tu razón de entrada" value={reason} onChange={(e) => setReason(e.target.value)} />
             </div>
-            <div>
-                <label>Código</label>
-                <input type="text" value={code} onChange={(e) => setCode(e.target.value)} />
-            </div>
-            <button type="submit">Registrar</button>
+            <div className="div">
+                <label className='text' for="code">Código</label>
+                <input className="cuadro-text" type="text" id="code" name="codigo" placeholder="Ingresa el código" value={code} onChange={(e) => setCode(e.target.value)} />
+            </div >
+            <button type="submit" className="boton">Registrar</button>
         </form>
     );
 };

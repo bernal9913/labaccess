@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { db } from '../firebase';
 import { doc, setDoc} from "firebase/firestore"
 import '../EntryForm.css';
+import { Link } from 'react-router-dom';
 
 const EntryForm = () => {
     const [name, setName] = useState('');
@@ -44,7 +45,10 @@ const EntryForm = () => {
                 <label className='text' for="code">Código</label>
                 <input className="cuadro-text" type="text" id="code" name="codigo" placeholder="Ingresa el código" value={code} onChange={(e) => setCode(e.target.value)} />
             </div >
+            <div className="form-actions" >
             <button type="submit" className="boton">Registrar</button>
+            <button type="button" className="boton"><Link to="/">Regresar</Link></button>
+            </div>
         </form>
         </main>
     );

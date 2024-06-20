@@ -1,47 +1,46 @@
-// src/components/ExitForm.js
-import React, { useState } from 'react';
+import React from 'react';
 import { db } from '../firebase';
+import { doc, updateDoc } from "firebase/firestore";
 
-const ExitForm = () => {
-    const [name, setName] = useState('');
+const ExitForm = ({ entries = [], fetchEntries }) => {
+    const registerExit = async (id) => {
+        //const exitTime = new Date().toISOString().slice(0, 16).replace('T', ' ');
+        let currentTime = new Date();
+        const localTime = new Date(currentTime.getTime() - 7 * 60 * 60 * 1000); // Subtract 7 hours (in milliseconds)
+        const exitTime = localTime.toISOString().slice(0, 16).replace('T', ' ');
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const exitTime = new Date().getTime()
 
         try {
-            const entries = await db.collection('entries')
-                .where('name', '==', name)
-                .orderBy('entryTime', 'desc')
-                .limit(1)
-                .get();
-
-            if (!entries.empty) {
-                const entryDoc = entries.docs[0];
-                await db.collection('exits').add({
-                    name,
-                    entryTime: entryDoc.data().entryTime,
-                    exitTime
-                });
-                alert('Salida registrada exitosamente');
-                setName('');
-            } else {
-                alert('No se encontró una entrada correspondiente');
-            }
+            await updateDoc(doc(db, 'entries', id), {
+                exitTime,
+                dentro: false
+            });
+            fetchEntries(); // Fetch the updated entries
         } catch (error) {
             console.error('Error al registrar la salida: ', error);
         }
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h2>Registro de Salida</h2>
-            <div>
-                <label>Nombre</label>
-                <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
-            </div>
-            <button type="submit">Registrar</button>
-        </form>
+        <div>
+            <h2>Registros de Personas Dentro</h2>
+            {entries.length === 0 ? (
+                <p>Cargando datos o no hay registros disponibles...</p>
+            ) : (
+                <ul>
+                    {entries
+                        .filter(entry => entry.dentro)
+                        .map((entry, index) => (
+                            <li key={index}>
+                                <p>Nombre: {entry.name}</p>
+                                <p>Razón: {entry.reason}</p>
+                                <p>Hora de Entrada: {entry.entryTime}</p>
+                                <button onClick={() => registerExit(entry.id)}>Registrar Salida</button>
+                            </li>
+                        ))}
+                </ul>
+            )}
+        </div>
     );
 };
 

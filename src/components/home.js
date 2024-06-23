@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from "../ESCUDO-COLOR.png";
-import EntryForm from './EntryForm';
+
 import { Link } from 'react-router-dom';
 const home  = () => {
     return (

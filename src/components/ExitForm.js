@@ -1,5 +1,6 @@
 import React from 'react';
 import { db } from '../firebase';
+import '../ExitForm.css';
 import { doc, updateDoc } from "firebase/firestore";
 
 const ExitForm = ({ entries = [], fetchEntries }) => {
@@ -22,25 +23,31 @@ const ExitForm = ({ entries = [], fetchEntries }) => {
     };
 
     return (
-        <div>
-            <h2>Registros de Personas Dentro</h2>
+        <main className="main">
+            <form className="form">
+            <div className="div">
+            <entry className="entry">
+            <h2>Registros de Personas Dentro</h2> 
             {entries.length === 0 ? (
                 <p>Cargando datos o no hay registros disponibles...</p>
             ) : (
-                <ul>
-                    {entries
+                <ul className="list">
+                    {entries 
                         .filter(entry => entry.dentro)
                         .map((entry, index) => (
                             <li key={index}>
-                                <p>Nombre: {entry.name}</p>
-                                <p>Razón: {entry.reason}</p>
-                                <p>Hora de Entrada: {entry.entryTime}</p>
-                                <button onClick={() => registerExit(entry.id)}>Registrar Salida</button>
+                                <p><strong>Nombre:</strong> {entry.name}</p>
+                                <p><strong>Razón:</strong> {entry.reason}</p>
+                                <p><strong>Hora de Entrada:</strong> {entry.entryTime}</p>
+                                <button className="button" onClick={() => registerExit(entry.id)}>Registrar Salida</button>
                             </li>
                         ))}
                 </ul>
             )}
-        </div>
+            </entry>
+            </div>
+            </form>
+        </main>
     );
 };
 

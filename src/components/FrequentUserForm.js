@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { db } from '../firebase';
+import '../frequentuserform.css';
 import { collection, addDoc } from "firebase/firestore";
 
 const FrequentUserForm = () => {
@@ -22,30 +23,40 @@ const FrequentUserForm = () => {
     };
 
     return (
-        <div>
-            <h2>Registrar Usuario Frecuente</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Nombre</label>
-                    <input
-                        type="text"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Cargo</label>
-                    <input
-                        type="text"
-                        value={role}
-                        onChange={(e) => setRole(e.target.value)}
-                        required
-                    />
-                </div>
-                <button type="submit">Registrar</button>
-            </form>
-        </div>
+        <main className="main">
+            <form className="form">
+                    <div className="div">
+                        <entry className="entry">
+                            <h2>Registrar Usuario Frecuente</h2>
+                            <form onSubmit={handleSubmit}>
+                                <div className="div">
+                                    <label className="text">Nombre</label>
+                                    <input
+                                        className="cuadro-text"
+                                        type="text"
+                                        placeholder="Ingresa tu nombre"
+                                        value={name}
+                                        onChange={(e) => setName(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                <div className="div">
+                                    <label className="text">Cargo</label>
+                                    <input
+                                        className="cuadro-text"
+                                        type="text"
+                                        placeholder="Ingresa tu cargo"
+                                        value={role}
+                                        onChange={(e) => setRole(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                <button className="boton" type="submit">Registrar</button>
+                            </form>
+                        </entry>
+                    </div>   
+            </form>    
+        </main>    
     );
 };
 

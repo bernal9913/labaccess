@@ -57,11 +57,11 @@ const Dashboard = () => {
 					<thead>
 					<tr>
 						<th>ID</th>
-						<th>Nombre</th>
-						<th>Razón</th>
-						<th>Hora de Entrada</th>
-						<th>Hora de Salida</th>
-						<th>Dentro</th>
+						<th scope="col">Nombre</th>
+						<th scope="col">Razón</th>
+						<th scope="col">Hora de Entrada</th>
+						<th scope="col">Hora de Salida</th>
+						<th scope="col">Dentro</th>
 					</tr>
 					</thead>
 					<tbody>

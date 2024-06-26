@@ -9,6 +9,7 @@ import Home from './components/home';
 import FrequentUserForm from "./components/FrequentUserForm";
 import Dashboard from "./components/dashboard";
 
+
 function QuickEntryExit({ type }){
 	const { id } = useParams();
 	const navigate = useNavigate();

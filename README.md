@@ -20,3 +20,13 @@ Instalamos el modulo necesario para firebase
 
 ### 7. `firebase deploy`
 Si todo esta correcto, usar este comando para hacer deploy a la pagina web
+
+
+
+## links 
+- https://animal-crossing-4c5da.web.app/   pagina principal 
+- https://animal-crossing-4c5da.web.app/dashboard
+- https://animal-crossing-4c5da.web.app/Registro
+- https://animal-crossing-4c5da.web.app/Salidas
+- https://animal-crossing-4c5da.web.app/frequent-users pagina de creacion de usuarios frecuentes 
+- https://animal-crossing-4c5da.web.app/about 

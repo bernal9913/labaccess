@@ -3,10 +3,12 @@ import { db } from '../firebase';
 import { collection, getDocs } from "firebase/firestore";
 import { CSVLink } from "react-csv";
 import '../dashboard.css';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 const Dashboard = () => {
 	const [entries, setEntries] = useState([]);
 	const [frequentUsers, setFrequentUsers] = useState([]);
+	const [copiedText, setCopiedText] = useState('');
 
 	const fetchEntries = async () => {
 		const querySnapshot = await getDocs(collection(db, "entries"));
@@ -30,6 +32,12 @@ const Dashboard = () => {
 		fetchEntries();
 		fetchFrequentUsers();
 	}, []);
+
+	const handleCopyLink = (id, type) => {
+		const baseUrl = "https://animal-crossing-4c5da.web.app";
+		const url = `${baseUrl}/${type}/${id}`;
+		setCopiedText(url);
+	};
 
 	const headers = [
 		{ label: "ID", key: "id" },
@@ -89,6 +97,7 @@ const Dashboard = () => {
 							<th>ID</th>
 							<th>Nombre</th>
 							<th>Cargo</th>
+							<th>Acciones</th>
 						</tr>
 						</thead>
 						<tbody>
@@ -97,6 +106,14 @@ const Dashboard = () => {
 								<td>{user.id}</td>
 								<td>{user.name}</td>
 								<td>{user.role}</td>
+								<td>
+									<CopyToClipboard text={`https://animal-crossing-4c5da.web.app/entrada/${user.id}`}>
+										<button className="action-button" onClick={() => handleCopyLink(user.id, 'entrada')}>Copiar Enlace de Entrada</button>
+									</CopyToClipboard>
+									<CopyToClipboard text={`https://animal-crossing-4c5da.web.app/salida/${user.id}`}>
+										<button className="action-button" onClick={() => handleCopyLink(user.id, 'salida')} style={{ marginLeft: '10px' }}>Copiar Enlace de Salida</button>
+									</CopyToClipboard>
+								</td>
 							</tr>
 						))}
 						</tbody>

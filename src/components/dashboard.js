@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { db } from '../firebase';
 import { collection, getDocs } from "firebase/firestore";
 import { CSVLink } from "react-csv";
+import '../dashboard.css';
 
 const Dashboard = () => {
 	const [entries, setEntries] = useState([]);
@@ -46,64 +47,67 @@ const Dashboard = () => {
 	];
 
 	return (
-		<div>
-			<h1>Dashboard</h1>
-			<section>
-				<h2>Entradas y Salidas</h2>
-				<CSVLink data={entries} headers={headers} filename={"entradas-salidas.csv"}>
-					Descargar CSV
-				</CSVLink>
-				<table>
-					<thead>
-					<tr>
-						<th>ID</th>
-						<th scope="col">Nombre</th>
-						<th scope="col">Razón</th>
-						<th scope="col">Hora de Entrada</th>
-						<th scope="col">Hora de Salida</th>
-						<th scope="col">Dentro</th>
-					</tr>
-					</thead>
-					<tbody>
-					{entries.map(entry => (
-						<tr key={entry.id}>
-							<td>{entry.id}</td>
-							<td>{entry.name}</td>
-							<td>{entry.reason}</td>
-							<td>{entry.entryTime}</td>
-							<td>{entry.exitTime}</td>
-							<td>{entry.dentro ? 'Sí' : 'No'}</td>
+		<main className="main">
+			<div className="dashboard">
+				<h1>Dashboard</h1>
+				<section className="section">
+					<h2>Entradas y Salidas</h2>
+
+					<table className="table">
+						<thead>
+						<tr>
+							<th>ID</th>
+							<th scope="col">Nombre</th>
+							<th scope="col">Razón</th>
+							<th scope="col">Hora de Entrada</th>
+							<th scope="col">Hora de Salida</th>
+							<th scope="col">Dentro</th>
 						</tr>
-					))}
-					</tbody>
-				</table>
-			</section>
-			<section>
-				<h2>Usuarios Frecuentes</h2>
-				<CSVLink data={frequentUsers} headers={userHeaders} filename={"usuarios-frecuentes.csv"}>
-					Descargar CSV
-				</CSVLink>
-				<table>
-					<thead>
-					<tr>
-						<th>ID</th>
-						<th>Nombre</th>
-						<th>Cargo</th>
-					</tr>
-					</thead>
-					<tbody>
-					{frequentUsers.map(user => (
-						<tr key={user.id}>
-							<td>{user.id}</td>
-							<td>{user.name}</td>
-							<td>{user.role}</td>
+						</thead>
+						<tbody>
+						{entries.map(entry => (
+							<tr key={entry.id}>
+								<td>{entry.id}</td>
+								<td>{entry.name}</td>
+								<td>{entry.reason}</td>
+								<td>{entry.entryTime}</td>
+								<td>{entry.exitTime}</td>
+								<td>{entry.dentro ? 'Sí' : 'No'}</td>
+							</tr>
+						))}
+						</tbody>
+					</table>
+					<CSVLink data={entries} headers={headers} filename={"entradas-salidas.csv"} className="csv-button">
+						Descargar CSV
+					</CSVLink>
+				</section>
+				<section className="section"> 
+					<h2>Usuarios Frecuentes</h2>
+					<table className="table">
+						<thead>
+						<tr>
+							<th>ID</th>
+							<th>Nombre</th>
+							<th>Cargo</th>
 						</tr>
-					))}
-					</tbody>
-				</table>
-			</section>
-		</div>
-	);
-};
+						</thead>
+						<tbody>
+						{frequentUsers.map(user => (
+							<tr key={user.id}>
+								<td>{user.id}</td>
+								<td>{user.name}</td>
+								<td>{user.role}</td>
+							</tr>
+						))}
+						</tbody>
+					</table>
+				</section>
+				<CSVLink data={entries} headers={headers} filename={"entradas-salidas.csv"} className="csv-button">
+						Descargar CSV
+				</CSVLink>
+			</div>
+		</main>
+		);
+	};
 
 export default Dashboard;

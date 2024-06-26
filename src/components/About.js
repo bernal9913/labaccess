@@ -1,0 +1,39 @@
+import React from 'react';
+import '../About.css';
+import estefyImage from '../assets/estefy.jpg';
+import carlosImage from '../assets/carlos.jpg';
+import desiderioImage from '../assets/desiderio.jpg';
+
+const About = () => {
+	return (
+		<div className="about-container">
+			<h1>Acerca de Nosotros</h1>
+			<p className="description">
+				Proyecto creado para automatizar las entradas y salidas del Laboratorio de Conducta Experimental
+				como parte del servicio social de los estudiantes de Ingeniería en Sistemas de Información.
+			</p>
+			<div className="team">
+				<div className="team-member">
+					<a href="https://www.youtube.com/watch?v=tGE381tbQa8" target="_blank" rel="noopener noreferrer">
+						<img src={estefyImage} alt="Estefy" className="team-image"/>
+					</a>
+					<h3>Estefy</h3>
+				</div>
+				<div className="team-member">
+					<a href="https://www.youtube.com/watch?v=X_SEwgDl02E" target="_blank" rel="noopener noreferrer">
+						<img src={carlosImage} alt="Carlos" className="team-image"/>
+					</a>
+					<h3>Carlos</h3>
+				</div>
+				<div className="team-member">
+					<a href="https://www.youtube.com/watch?v=ARWg160eaX4" target="_blank" rel="noopener noreferrer">
+						<img src={desiderioImage} alt="Desiderio" className="team-image"/>
+					</a>
+					<h3>Desiderio</h3>
+				</div>
+			</div>
+		</div>
+	);
+};
+
+export default About;

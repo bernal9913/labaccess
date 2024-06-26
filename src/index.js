@@ -8,13 +8,15 @@ import ExitForm from './components/ExitForm';
 import Home from './components/home';
 import FrequentUserForm from "./components/FrequentUserForm";
 import Dashboard from "./components/dashboard";
+import About from "./components/About";
 
 const router = createBrowserRouter([
     { path: "/", element: <Home /> },
     { path: "/Registro", element: <EntryForm /> },
     { path: "/Salidas", element: <ExitForm /> },
     { path: "/frequent-users", element: <FrequentUserForm/>},
-    { path: "/dashboard", element: <Dashboard /> }
+    { path: "/dashboard", element: <Dashboard /> },
+    { path: "/about", element: <About /> }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

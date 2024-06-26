@@ -8,6 +8,7 @@ import ExitForm from './components/ExitForm';
 import Home from './components/home';
 import FrequentUserForm from "./components/FrequentUserForm";
 import Dashboard from "./components/dashboard";
+import About from "./components/About";
 
 
 function QuickEntryExit({ type }){
@@ -95,6 +96,7 @@ function App() {
 					<Route path="/salida/:id" element={<QuickEntryExit type="salida" />} />
 					<Route path="/frequent-users" element={<FrequentUserForm />} />
 					<Route path="/dashboard" element={<Dashboard />} />
+					<Route path="/about" element={<About />} />
 				</Routes>
 			</div>
 		</Router>

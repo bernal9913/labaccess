@@ -1,6 +1,7 @@
 import React from 'react';
 import { db } from '../firebase';
 import '../ExitForm.css';
+import imagen from '../ratauser.png';
 import { doc, updateDoc } from "firebase/firestore";
 
 const ExitForm = ({ entries = [], fetchEntries }) => {
@@ -36,6 +37,7 @@ const ExitForm = ({ entries = [], fetchEntries }) => {
                         .filter(entry => entry.dentro)
                         .map((entry, index) => (
                             <li key={index}>
+                                <img className="img" src={imagen} alt="imagen"/>                  
                                 <p><strong>Nombre:</strong> {entry.name}</p>
                                 <p><strong>Razón:</strong> {entry.reason}</p>
                                 <p><strong>Hora de Entrada:</strong> {entry.entryTime}</p>

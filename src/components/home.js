@@ -6,7 +6,7 @@ const home  = () => {
         <div className="App">
             <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo" />
-                <h1>Laboratorio de Conducta Experimental</h1>
+                <h1>Laboratorio de Análisis Experimental de la Conducta.</h1>
                 <p>Página de prueba para demostrar el diseño del Laboratorio de Conducta Experimental.</p>
             </header>
             <main className="App-main">

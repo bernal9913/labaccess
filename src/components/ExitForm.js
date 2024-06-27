@@ -36,7 +36,7 @@ const ExitForm = ({ entries = [], fetchEntries }) => {
                                 .filter(entry => entry.dentro)
                                 .map((entry, index) => (
                                     <ListItem key={index} alignItems="flex-start">
-                                        <Avatar src={imagen} alt="imagen" style={{ marginRight: '10px' }} />
+                                        <Avatar src={imagen} alt="imagen" style={{ marginRight: '10px', borderRadius: 0 }} />
                                         <ListItemText
                                             primary={`Nombre: ${entry.name}`}
                                             secondary={

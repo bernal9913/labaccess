@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { db } from '../firebase';
 import { doc, setDoc } from "firebase/firestore";
-import { TextField, Button, Container, Typography, Box } from '@mui/material';
+import { TextField, Button, Container, Typography, Box, Avatar } from '@mui/material';
 import { Link } from 'react-router-dom';
+import imagen from '../rataentry.png';
 
 const EntryForm = ({ fetchEntries }) => {
     const [name, setName] = useState('');
@@ -37,10 +38,23 @@ const EntryForm = ({ fetchEntries }) => {
 
     return (
         <Container component="main" maxWidth="xs">
-            <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            <Box component="form" onSubmit={handleSubmit} sx={{ 
+                mt: 3,
+                display: 'flex', 
+                flexDirection: 'column', 
+                alignItems: 'center'  
+                }}>
                 <Typography component="h1" variant="h5">
                     Registro de Entrada
                 </Typography>
+                <Avatar src={imagen} alt="imagen" style={{ 
+                    marginRight: '10px', 
+                    borderRadius: 0,
+                    width: '70px',
+                    height: '70px' 
+                }} 
+                    sx={{ mt: 2 }} // Margen superior entre el título y el avatar
+                    />
                 <TextField
                     variant="outlined"
                     margin="normal"

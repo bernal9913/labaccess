@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { db } from '../firebase';
-import { collection, getDocs } from "firebase/firestore";
 import { CSVLink } from "react-csv";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { DataGrid } from '@mui/x-data-grid';
+import { Button } from '@mui/material';
 import '../dashboard.css';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
@@ -11,21 +13,31 @@ const Dashboard = () => {
 	const [copiedText, setCopiedText] = useState('');
 
 	const fetchEntries = async () => {
-		const querySnapshot = await getDocs(collection(db, "entries"));
-		const entriesArray = [];
-		querySnapshot.forEach((doc) => {
-			entriesArray.push({ id: doc.id, ...doc.data() });
-		});
-		setEntries(entriesArray);
+		const q = query(collection(db, "entries"));
+		try {
+			const querySnapshot = await getDocs(q);
+			const entriesArray = [];
+			querySnapshot.forEach((doc) => {
+				entriesArray.push({ id: doc.id, ...doc.data() });
+			});
+			setEntries(entriesArray);
+		} catch (error) {
+			console.error('Error fetching entries:', error);
+		}
 	};
 
 	const fetchFrequentUsers = async () => {
-		const querySnapshot = await getDocs(collection(db, "frequentUsers"));
-		const usersArray = [];
-		querySnapshot.forEach((doc) => {
-			usersArray.push({ id: doc.id, ...doc.data() });
-		});
-		setFrequentUsers(usersArray);
+		const q = query(collection(db, "frequentUsers"));
+		try {
+			const querySnapshot = await getDocs(q);
+			const usersArray = [];
+			querySnapshot.forEach((doc) => {
+				usersArray.push({ id: doc.id, ...doc.data() });
+			});
+			setFrequentUsers(usersArray);
+		} catch (error) {
+			console.error('Error fetching frequent users:', error);
+		}
 	};
 
 	useEffect(() => {
@@ -33,10 +45,12 @@ const Dashboard = () => {
 		fetchFrequentUsers();
 	}, []);
 
-	const handleCopyLink = (id, type) => {
+	const handleCopyLink = (type, id) => {
 		const baseUrl = "https://animal-crossing-4c5da.web.app";
 		const url = `${baseUrl}/${type}/${id}`;
-		setCopiedText(url);
+		navigator.clipboard.writeText(url).then(() => {
+			alert(`Link copiado: ${url}`);
+		});
 	};
 
 	const headers = [
@@ -54,77 +68,76 @@ const Dashboard = () => {
 		{ label: "Cargo", key: "role" }
 	];
 
-	return (
-		<main className="main">
-			<div className="dashboard">
-				<h1>Dashboard</h1>
-				<section className="section">
-					<h2>Entradas y Salidas</h2>
+	const columnsEntries = [
+		{ field: 'id', headerName: 'ID', width: 150 },
+		{ field: 'name', headerName: 'Nombre', width: 200 },
+		{ field: 'entryTime', headerName: 'Hora de Entrada', width: 200 },
+		{ field: 'exitTime', headerName: 'Hora de Salida', width: 200 },
+		{ field: 'reason', headerName: 'Razón', width: 200 },
+		{ field: 'dentro', headerName: 'Dentro', width: 200 },
+		// Añade más columnas según sea necesario
+	];
 
-					<table className="table">
-						<thead>
-						<tr>
-							<th>ID</th>
-							<th scope="col">Nombre</th>
-							<th scope="col">Razón</th>
-							<th scope="col">Hora de Entrada</th>
-							<th scope="col">Hora de Salida</th>
-							<th scope="col">Dentro</th>
-						</tr>
-						</thead>
-						<tbody>
-						{entries.map(entry => (
-							<tr key={entry.id}>
-								<td>{entry.id}</td>
-								<td>{entry.name}</td>
-								<td>{entry.reason}</td>
-								<td>{entry.entryTime}</td>
-								<td>{entry.exitTime}</td>
-								<td>{entry.dentro ? 'Sí' : 'No'}</td>
-							</tr>
-						))}
-						</tbody>
-					</table>
-					<CSVLink data={entries} headers={headers} filename={"entradas-salidas.csv"} className="csv-button">
-						Descargar CSV
-					</CSVLink>
-				</section>
-				<section className="section"> 
-					<h2>Usuarios Frecuentes</h2>
-					<table className="table">
-						<thead>
-						<tr>
-							<th>ID</th>
-							<th>Nombre</th>
-							<th>Cargo</th>
-							<th>Acciones</th>
-						</tr>
-						</thead>
-						<tbody>
-						{frequentUsers.map(user => (
-							<tr key={user.id}>
-								<td>{user.id}</td>
-								<td>{user.name}</td>
-								<td>{user.role}</td>
-								<td>
-									<CopyToClipboard text={`https://animal-crossing-4c5da.web.app/entrada/${user.id}`}>
-										<button className="action-button" onClick={() => handleCopyLink(user.id, 'entrada')}>Copiar Enlace de Entrada</button>
-									</CopyToClipboard>
-									<CopyToClipboard text={`https://animal-crossing-4c5da.web.app/salida/${user.id}`}>
-										<button className="action-button" onClick={() => handleCopyLink(user.id, 'salida')} style={{ marginLeft: '10px' }}>Copiar Enlace de Salida</button>
-									</CopyToClipboard>
-								</td>
-							</tr>
-						))}
-						</tbody>
-					</table>
-				</section>
-				<CSVLink data={entries} headers={headers} filename={"entradas-salidas.csv"} className="csv-button">
-						Descargar CSV
-				</CSVLink>
+	const columnsFrequentUsers = [
+		{ field: 'id', headerName: 'ID', width: 150 },
+		{ field: 'name', headerName: 'Nombre', width: 200 },
+		{ field: 'role', headerName: 'Cargo', width: 200 },
+		{
+			field: 'actions',
+			headerName: 'Acciones',
+			width: 250,
+			renderCell: (params) => (
+				<>
+					<Button
+						variant="contained"
+						color="primary"
+						onClick={() => handleCopyLink('entrada', params.row.id)}
+						style={{ marginRight: '10px' }}
+					>
+						Copiar Enlace de Entrada
+					</Button>
+				</>
+			),},
+		{
+			field: "actions1",
+			headerName: "Acciones1",
+			width: 250,
+			renderCell: (params) => (
+				<>
+					<Button
+						variant="contained"
+						color="secondary"
+						onClick={() => handleCopyLink('salida', params.row.id)}
+					>
+						Copiar Enlace de Salida
+					</Button>
+				</>
+			)
+		},
+	];
+
+	return (
+		<div style={{ padding: '20px' }}>
+			<h1>Dashboard</h1>
+			<div style={{ height: 400, width: '100%', marginBottom: '20px' }}>
+				<DataGrid rows={entries} columns={columnsEntries} pageSize={5} />
 			</div>
-		</main>
-		);
-	};
+			<Button variant="contained" color="primary">
+				<CSVLink
+					data={entries}
+					headers={headers}
+					filename={"entries.csv"}
+					style={{ color: "white", textDecoration: "none" }}
+				>
+					Descargar CSV
+				</CSVLink>
+			</Button>
+			<h2>Usuarios Frecuentes</h2>
+			<div style={{ height: 400, width: '100%' }}>
+				<DataGrid rows={frequentUsers} columns={columnsFrequentUsers} pageSize={5} />
+			</div>
+		</div>
+	);
+};
 
 export default Dashboard;

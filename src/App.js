@@ -9,6 +9,7 @@ import Home from './components/home';
 import FrequentUserForm from "./components/FrequentUserForm";
 import Dashboard from "./components/dashboard";
 import About from "./components/About";
+import Navbar from "./components/NavBar";
 
 
 function QuickEntryExit({ type }){
@@ -87,6 +88,8 @@ function App() {
 
 	return (
 		<Router>
+
+			<Navbar />
 			<div className="App">
 				<Routes>
 					<Route path="/" element={<Home />} />

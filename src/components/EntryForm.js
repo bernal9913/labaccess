@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { db } from '../firebase';
 import { doc, setDoc } from "firebase/firestore";
-import '../EntryForm.css';
+import { TextField, Button, Container, Typography, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 const EntryForm = ({ fetchEntries }) => {
@@ -25,7 +25,7 @@ const EntryForm = ({ fetchEntries }) => {
                 entryTime,
                 dentro
             });
-            alert('Entrada registrada exitosamente');
+            alert('Entrada registrada exitosamente\nNo olvides registrar tu salida!');
             setName('');
             setReason('');
             setCode('');
@@ -36,41 +36,59 @@ const EntryForm = ({ fetchEntries }) => {
     };
 
     return (
-        <main className="main">
-            <form className="form" onSubmit={handleSubmit}>
-                <h2 className="h2">Registro de Entrada</h2>
-                <div className="div">
-                    <label className='text' htmlFor="fname">Nombre</label>
-                    <input
-                        className="cuadro-text"
-                        type="text"
-                        id="fname"
-                        name="firstname"
-                        placeholder="Ingresa tu nombre"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                    />
-                </div>
-                <div className="div">
-                    <label className='text' htmlFor="reason">Razón de Entrada</label>
-                    <input
-                        className="cuadro-text"
-                        type="text"
-                        id="reason"
-                        name="razon"
-                        placeholder="Ingresa tu razón de entrada"
-                        value={reason}
-                        onChange={(e) => setReason(e.target.value)}
-                    />
-                </div>
-                <div className="form-actions">
-                    <button type="submit" className="boton">Registrar</button>
-                    <button type="button" className="boton">
-                        <Link to="/">Regresar</Link>
-                    </button>
-                </div>
-            </form>
-        </main>
+        <Container component="main" maxWidth="xs">
+            <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+                <Typography component="h1" variant="h5">
+                    Registro de Entrada
+                </Typography>
+                <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="fname"
+                    label="Nombre"
+                    name="firstname"
+                    autoComplete="fname"
+                    autoFocus
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                />
+                <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="reason"
+                    label="Razón de Entrada"
+                    type="text"
+                    id="reason"
+                    autoComplete="reason"
+                    value={reason}
+                    onChange={(e) => setReason(e.target.value)}
+                />
+                <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    sx={{ mt: 3, mb: 2 }}
+                >
+                    Registrar
+                </Button>
+                <Button
+                    type="button"
+                    fullWidth
+                    variant="contained"
+                    color="secondary"
+                    component={Link}
+                    to="/"
+                    sx={{ mt: 1 }}
+                >
+                    Regresar
+                </Button>
+            </Box>
+        </Container>
     );
 };
 

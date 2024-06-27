@@ -1,6 +1,5 @@
 import React from 'react';
 import logo from "../ESCUDO-COLOR.png";
-
 import { Link } from 'react-router-dom';
 const home  = () => {
     return (

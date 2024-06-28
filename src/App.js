@@ -10,6 +10,7 @@ import FrequentUserForm from "./components/FrequentUserForm";
 import Dashboard from "./components/dashboard";
 import About from "./components/About";
 import Navbar from "./components/NavBar";
+import NotFound from "./components/NotFound";
 
 
 function QuickEntryExit({ type }){
@@ -100,6 +101,7 @@ function App() {
 					<Route path="/frequent-users" element={<FrequentUserForm />} />
 					<Route path="/dashboard" element={<Dashboard />} />
 					<Route path="/about" element={<About />} />
+					<Route component={NotFound} /> {/* Ruta 404 */}
 				</Routes>
 			</div>
 		</Router>

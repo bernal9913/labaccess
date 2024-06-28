@@ -55,7 +55,7 @@ const Navbar = () => {
 
     return (
         <>
-            <AppBar position="static" sx={{ backgroundColor: '#282c33' }}>
+            <AppBar position="static" sx={{ backgroundColor: '#3f51b5' }}>
                 <Toolbar>
                     <img src={logo} alt="Logo" style={{ marginRight: '10px', width: '40px', height: '40px' }} />
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>

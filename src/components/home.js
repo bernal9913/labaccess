@@ -1,30 +1,72 @@
 import React from 'react';
 import logo from "../ESCUDO-COLOR.png";
-import { Link } from 'react-router-dom';
-const home  = () => {
+import imagen from '../rataestudio.png';
+import imagen2 from '../servicio.png';
+import { Container, Typography, Avatar, Box } from '@mui/material';
+
+const home = () => {
     return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <h1>Laboratorio de Análisis Experimental de la Conducta.</h1>
-                <p>Página de prueba para demostrar el diseño del Laboratorio de Conducta Experimental.</p>
-            </header>
-            <main className="App-main">
-                <section className="App-section">
-                    <h2>Nuestro Compromiso</h2>
-                    <p>Brindar servicios y productos de calidad para nuestros clientes.</p>
-                    <Link to="/Registro" className="App-btn">Registro de Entrada</Link>
-                </section>
-                <section id="mas-info" className="App-info">
-                    <h2>¿Quiénes Somos?</h2>
-                    <p>Somos un laboratorio dedicado a estudios avanzados en conducta humana y animal...</p>
-                </section>
-            </main>
-            <footer className="App-footer">
-                <p>&copy; 2024 Universidad de Sonora. All rights reserved.</p>
-            </footer>
-        </div>
-            
+      <Box sx={{ flexGrow: 1, backgroundColor: '#f0f4f8', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+        <Box
+          component="header"
+          sx={{ textAlign: 'center', padding: 4, backgroundColor: '#fff', boxShadow: 1, marginBottom: 4 }}
+        >
+          <img src={logo} alt="logo" style={{ height: '100px', marginBottom: '16px' }} />
+          <Typography variant="h4" component="h1" sx={{ color: '#3f51b5', marginBottom: 2 }}>
+            Laboratorio de Análisis Experimental de la Conducta
+          </Typography>
+          <Typography variant="body1" sx={{ color: '#666' }}>
+            Página de prueba para demostrar el diseño del Laboratorio de Conducta Experimental.
+          </Typography>
+        </Box>
+        <Container component="main" sx={{ flex: 1, padding: 4 }}>
+          <Box sx={{ 
+                marginBottom: 4, 
+                textAlign: 'center',                 
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center'
+                }}
+                >
+            <Typography variant="h5" component="h2" sx={{ color: '#3f51b5', marginBottom: 2, }}>
+              Nuestro Compromiso
+            </Typography>
+            <Typography variant="body1" sx={{ color: '#666', marginBottom: 2 }}>
+              Brindar servicios y productos de calidad para nuestros clientes.
+            </Typography>
+            <Avatar src={imagen2} alt="imagen" style={{
+                    marginRight: '10px',
+                    borderRadius: 0,
+                    width: '70px',
+                    height: '70px'
+                }} sx={{ mt: 2 }} />
+          </Box>
+          <Box id="mas-info" sx={{ 
+                textAlign: 'center',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center' }}>
+            <Typography variant="h5" component="h2" sx={{ color: '#3f51b5', marginBottom: 2 }}>
+              ¿Quiénes Somos?
+            </Typography>
+            <Typography variant="body1" sx={{ color: '#666' }}>
+              Somos un laboratorio dedicado a estudios avanzados en conducta humana y animal...
+            </Typography>
+            <Avatar src={imagen} alt="imagen" style={{
+                    marginRight: '10px',
+                    borderRadius: 0,
+                    width: '70px',
+                    height: '70px'
+                }} sx={{ mt: 2 }} />
+          </Box>
+        </Container>
+        <Box component="footer" sx={{ padding: 2, textAlign: 'center', backgroundColor: '#3f51b5', color: '#fff', marginTop: 4 }}>
+          <Typography variant="body2">
+            &copy; 2024 Universidad de Sonora. Todos los derechos reservados.
+          </Typography>
+        </Box>
+      </Box>
     );
-}
+  }
+  
 export default home;

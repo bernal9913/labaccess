@@ -101,7 +101,7 @@ function App() {
 					<Route path="/frequent-users" element={<FrequentUserForm />} />
 					<Route path="/dashboard" element={<Dashboard />} />
 					<Route path="/about" element={<About />} />
-					<Route component={NotFound} /> {/* Ruta 404 */}
+					<Route path="*" element={<NotFound />} /> {/* Ruta 404 */}
 				</Routes>
 			</div>
 		</Router>

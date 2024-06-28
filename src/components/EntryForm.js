@@ -51,8 +51,7 @@ const EntryForm = ({ fetchEntries }) => {
                     marginRight: '10px', 
                     borderRadius: 0,
                     width: '70px',
-                    height: '70px' 
-                }} 
+                    height: '70px' }} 
                     sx={{ mt: 2 }} // Margen superior entre el título y el avatar
                     />
                 <TextField

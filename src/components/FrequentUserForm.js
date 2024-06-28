@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { db } from '../firebase';
-import '../frequentuserform.css';
+import { TextField, Button, Container, Typography, Box, Avatar } from '@mui/material';
+import imagen from '../ratafrequent.png';
 import { collection, addDoc } from "firebase/firestore";
 
 const FrequentUserForm = () => {
@@ -23,40 +24,60 @@ const FrequentUserForm = () => {
     };
 
     return (
-        <main className="main">
-            <form className="form">
-                    <div className="div">
-                        <entry className="entry">
-                            <h2>Registrar Usuario Frecuente</h2>
-                            <form onSubmit={handleSubmit}>
-                                <div className="div">
-                                    <label className="text">Nombre</label>
-                                    <input
-                                        className="cuadro-text"
-                                        type="text"
-                                        placeholder="Ingresa tu nombre"
-                                        value={name}
-                                        onChange={(e) => setName(e.target.value)}
-                                        required
-                                    />
-                                </div>
-                                <div className="div">
-                                    <label className="text">Cargo</label>
-                                    <input
-                                        className="cuadro-text"
-                                        type="text"
-                                        placeholder="Ingresa tu cargo"
-                                        value={role}
-                                        onChange={(e) => setRole(e.target.value)}
-                                        required
-                                    />
-                                </div>
-                                <button className="boton" type="submit">Registrar</button>
-                            </form>
-                        </entry>
-                    </div>   
-            </form>    
-        </main>    
+        <Container component="main" maxWidth="xs">
+            <Box component="form" onSubmit={handleSubmit} sx={{ 
+                mt: 3,
+                display: 'flex', 
+                flexDirection: 'column', 
+                alignItems: 'center'  
+                }}>
+                    <Typography component="h1" variant="h5">
+                        Registrar Usuario Frecuente
+                    </Typography>
+                    <Avatar src={imagen} alt="imagen" style={{ 
+                    marginRight: '10px', 
+                    borderRadius: 0,
+                    width: '70px',
+                    height: '70px' }} 
+                    sx={{ mt: 2 }} // Margen superior entre el título y el avatar
+                    />
+                    <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="fname"
+                    label="Nombre"
+                    name="firstname"
+                    autoComplete="fname"
+                    autoFocus
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                />
+                    <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="role"
+                    label="Cargo"
+                    type="text"
+                    id="role"
+                    autoComplete="role"
+                    value={role}
+                    onChange={(e) => setRole(e.target.value)}
+                />
+                    <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    sx={{ mt: 3, mb: 2 }}
+                >
+                    Registrar
+                </Button>
+            </Box>           
+        </Container>           
     );
 };
 

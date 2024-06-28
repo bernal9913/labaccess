@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { db } from '../firebase';
 import { CSVLink } from "react-csv";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs, query, where, deleteDoc, doc } from "firebase/firestore";
 import { DataGrid } from '@mui/x-data-grid';
 import { Button } from '@mui/material';
-import '../dashboard.css';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { Box, CircularProgress, Typography } from '@mui/material';
+import hamsterRunning from '../chinchilla-on-wheel-running.gif';
 
 const Dashboard = () => {
 	const [entries, setEntries] = useState([]);
 	const [frequentUsers, setFrequentUsers] = useState([]);
+	const [loading, setLoading] = useState(true);
 	const [copiedText, setCopiedText] = useState('');
 
 	const fetchEntries = async () => {
@@ -43,14 +44,36 @@ const Dashboard = () => {
 	useEffect(() => {
 		fetchEntries();
 		fetchFrequentUsers();
+		setLoading(false);
 	}, []);
+
+	const downloadCSV = () => {
+		const csvData = entries.map(entry => ({
+			id: entry.id || 'vacio',
+			name: entry.name || 'vacio',
+			reason: entry.reason || 'vacio',
+			entryTime: entry.entryTime || 'vacio',
+			exitTime: entry.exitTime || 'vacio',
+			dentro: entry.dentro || 'false',
+			room: entry.room || 'vacio'
+		}));
+
+		return csvData;
+	};
 
 	const handleCopyLink = (type, id) => {
 		const baseUrl = "https://animal-crossing-4c5da.web.app";
 		const url = `${baseUrl}/${type}/${id}`;
-		navigator.clipboard.writeText(url).then(() => {
-			alert(`Link copiado: ${url}`);
-		});
+		setCopiedText(url);
+	};
+
+	const deleteUser = async (id) => {
+		try {
+			await deleteDoc(doc(db, 'frequentUsers', id));
+			fetchFrequentUsers(); // Fetch the updated frequent users
+		} catch (error) {
+			console.error('Error deleting user:', error);
+		}
 	};
 
 	const headers = [
@@ -59,7 +82,8 @@ const Dashboard = () => {
 		{ label: "Razón", key: "reason" },
 		{ label: "Hora de Entrada", key: "entryTime" },
 		{ label: "Hora de Salida", key: "exitTime" },
-		{ label: "Dentro", key: "dentro" }
+		{ label: "Dentro", key: "dentro" },
+		{ label: "Sala", key: "room" }
 	];
 
 	const userHeaders = [
@@ -73,9 +97,8 @@ const Dashboard = () => {
 		{ field: 'name', headerName: 'Nombre', width: 200 },
 		{ field: 'entryTime', headerName: 'Hora de Entrada', width: 200 },
 		{ field: 'exitTime', headerName: 'Hora de Salida', width: 200 },
-		{ field: 'reason', headerName: 'Razón', width: 200 },
-		{ field: 'dentro', headerName: 'Dentro', width: 200 },
-		// Añade más columnas según sea necesario
+		{ field: 'dentro', headerName: 'Dentro', width: 150 },
+		{ field: 'room', headerName: 'Sala', width: 150 },
 	];
 
 	const columnsFrequentUsers = [
@@ -85,7 +108,7 @@ const Dashboard = () => {
 		{
 			field: 'actions',
 			headerName: 'Acciones',
-			width: 250,
+			width: 750,
 			renderCell: (params) => (
 				<>
 					<Button
@@ -96,48 +119,53 @@ const Dashboard = () => {
 					>
 						Copiar Enlace de Entrada
 					</Button>
-				</>
-			),},
-		{
-			field: "actions1",
-			headerName: "Acciones1",
-			width: 250,
-			renderCell: (params) => (
-				<>
 					<Button
 						variant="contained"
 						color="secondary"
 						onClick={() => handleCopyLink('salida', params.row.id)}
+						style={{ marginRight: '10px' }}
 					>
 						Copiar Enlace de Salida
 					</Button>
+					<Button
+						variant="contained"
+						color="error"
+						onClick={() => deleteUser(params.row.id)}
+					>
+						Eliminar
+					</Button>
 				</>
 			)
-		},
+		}
 	];
 
 	return (
 		<div style={{ padding: '20px' }}>
 			<h1>Dashboard</h1>
-			<div style={{ height: 400, width: '100%', marginBottom: '20px' }}>
-				<DataGrid rows={entries} columns={columnsEntries} pageSize={5} />
-			</div>
-			<Button variant="contained" color="primary">
-				<CSVLink
-					data={entries}
-					headers={headers}
-					filename={"entries.csv"}
-					style={{ color: "white", textDecoration: "none" }}
-				>
-					Descargar CSV
-				</CSVLink>
-			</Button>
-			<h2>Usuarios Frecuentes</h2>
-			<div style={{ height: 400, width: '100%' }}>
-				<DataGrid rows={frequentUsers} columns={columnsFrequentUsers} pageSize={5} />
-			</div>
+			{loading ? (
+				<Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" height="300px">
+					<img src={hamsterRunning} alt="Cargando..." style={{ width: '150px', height: '150px' }} />
+					<Typography variant="body1" align="center">Cargando datos...</Typography>
+				</Box>
+			) : (
+				<>
+					<div style={{ height: 400, width: '100%', marginBottom: '20px' }}>
+						<DataGrid rows={entries} columns={columnsEntries} pageSize={5} />
+					</div>
+					<Button variant="contained" color="primary">
+						<CSVLink data={downloadCSV()} headers={headers} filename={"entries.csv"} style={{ color: 'inherit', textDecoration: 'none' }}>
+							Descargar CSV
+						</CSVLink>
+					</Button>
+					<h2>Usuarios Frecuentes</h2>
+					<div style={{ height: 400, width: '100%' }}>
+						<DataGrid rows={frequentUsers} columns={columnsFrequentUsers} pageSize={5} />
+					</div>
+				</>
+			)}
 		</div>
 	);
 };
 
 export default Dashboard;
+

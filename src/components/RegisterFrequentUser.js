@@ -4,7 +4,7 @@ import { db } from '../firebase';
 
 const RegisterFrequentUser = () => {
     const [name, setName] = useState('');
-    const [initials, setInitials] = useState('');
+    const [role, setRole] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -12,11 +12,11 @@ const RegisterFrequentUser = () => {
         try {
             await db.collection('frequentUsers').add({
                 name,
-                initials
+                role
             });
             alert('Usuario frecuente registrado exitosamente');
             setName('');
-            setInitials('');
+            setRole('');
         } catch (error) {
             console.error('Error al registrar usuario frecuente: ', error);
         }
@@ -30,8 +30,8 @@ const RegisterFrequentUser = () => {
                 <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
             </div>
             <div>
-                <label>Iniciales</label>
-                <input type="text" value={initials} onChange={(e) => setInitials(e.target.value)} />
+                <label>Cargo</label>
+                <input type="text" value={role} onChange={(e) => setRole(e.target.value)} />
             </div>
             <button type="submit">Registrar</button>
         </form>

@@ -43,6 +43,9 @@ const Navbar = () => {
                 <ListItem button component={Link} to="/Registro">
                     <ListItemText primary="Registro de Entrada visitantes" />
                 </ListItem>
+                <ListItem button component={Link} to="/frequent-users">
+                    <ListItemText primary="Usuarios Frecuentes" />
+                </ListItem>
                 <ListItem button component={Link} to="/Salidas">
                     <ListItemText primary="Registro de Salida visitantes" />
                 </ListItem>
@@ -72,6 +75,7 @@ const Navbar = () => {
                         <Button color="inherit" component={Link} to="/about">Sobre nosotros</Button>
                         <Button color="inherit" component={Link} to="/dashboard">Dashboard</Button>
                         <Button color="inherit" component={Link} to="/Registro">Registro de Entrada visitantes</Button>
+                        <Button color="inherit" component={Link} to="/frequent-users">Usuarios Frecuentes</Button>
                         <Button color="inherit" component={Link} to="/Salidas">Registro de Salida visitantes</Button>
                     </Box>
                 </Toolbar>

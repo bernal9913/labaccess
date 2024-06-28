@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { db } from '../firebase';
 import { doc, updateDoc } from "firebase/firestore";
-import { Button, Card, CardContent, Typography, List, ListItem, ListItemText, Avatar, CircularProgress } from '@mui/material';
+import { Button, Card, CardContent, Typography, List, ListItem, ListItemText, Avatar, CircularProgress, Box } from '@mui/material';
 import imagen from '../ratauser.png';
+import hamsterRunning from '../chinchilla-on-wheel-running.gif';
 
 const ExitForm = ({ entries = [], fetchEntries }) => {
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        if (entries.length > 0) {
+            setLoading(false);
+        }
+    }, [entries]);
+
     const registerExit = async (id) => {
         let currentTime = new Date();
         const localTime = new Date(currentTime.getTime() - 7 * 60 * 60 * 1000); // Subtract 7 hours (in milliseconds)
@@ -28,8 +37,13 @@ const ExitForm = ({ entries = [], fetchEntries }) => {
                     <Typography variant="h4" gutterBottom>
                         Registros de Personas Dentro
                     </Typography>
-                    {entries.length === 0 ? (
-                        <Typography variant="body1">Cargando datos o no hay registros disponibles...</Typography>
+                    {loading ? (
+                        <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" height="300px">
+                            <img src={hamsterRunning} alt="Cargando..." style={{ width: '150px', height: '150px' }} />
+                            <Typography variant="body1" align="center">Cargando datos...</Typography>
+                        </Box>
+                    ) : entries.length === 0 ? (
+                        <Typography variant="body1">No hay registros disponibles...</Typography>
                     ) : (
                         <List>
                             {entries
@@ -46,6 +60,8 @@ const ExitForm = ({ entries = [], fetchEntries }) => {
                                                     </Typography>
                                                     <br />
                                                     Hora de Entrada: {entry.entryTime}
+                                                    <br />
+                                                    Sala: {entry.room}
                                                 </>
                                             }
                                         />

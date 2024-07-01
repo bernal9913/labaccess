@@ -17,19 +17,28 @@ const About = () => {
 					<a href="https://www.youtube.com/watch?v=tGE381tbQa8" target="_blank" rel="noopener noreferrer">
 						<img src={estefyImage} alt="Estefy" className="team-image"/>
 					</a>
-					<h3>Estefy</h3>
+					<h3>Estefy Grave</h3>
+					<p className="member-description">
+						Encargada de UX/UI y documentacion
+					</p>
 				</div>
 				<div className="team-member">
 					<a href="https://www.youtube.com/watch?v=X_SEwgDl02E" target="_blank" rel="noopener noreferrer">
 						<img src={carlosImage} alt="Carlos" className="team-image"/>
 					</a>
-					<h3>Carlos</h3>
+					<h3>Carlos Bernal</h3>
+					<p className="member-description">
+						Encargado de la programación, bases de datos e implementación
+					</p>
 				</div>
 				<div className="team-member">
 					<a href="https://www.youtube.com/watch?v=ARWg160eaX4" target="_blank" rel="noopener noreferrer">
 						<img src={desiderioImage} alt="Desiderio" className="team-image"/>
 					</a>
-					<h3>Desiderio</h3>
+					<h3>Rene Antunez</h3>
+					<p className="member-description">
+						Encargado de testing y diseño
+					</p>
 				</div>
 			</div>
 		</div>

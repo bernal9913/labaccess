@@ -1,41 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import { db } from './firebase';
-import { collection, getDocs, query, where, doc, updateDoc, getDoc, setDoc} from "firebase/firestore";
-import {BrowserRouter as Router, Routes, Route, useParams, useNavigate} from 'react-router-dom';
+import { collection, getDocs, query, where, doc, updateDoc, getDoc, setDoc } from "firebase/firestore";
+import { BrowserRouter as Router, Routes, Route, useParams, useNavigate } from 'react-router-dom';
 import EntryForm from './components/EntryForm';
 import ExitForm from './components/ExitForm';
-import Home from './components/home';
+import Home from './components/Home';
 import FrequentUserForm from "./components/FrequentUserForm";
-import Dashboard from "./components/dashboard";
+import Dashboard from "./components/Dashboard";
 import About from "./components/About";
 import Navbar from "./components/NavBar";
 import NotFound from "./components/NotFound";
+import QuickEntryForm from "./components/QuickEntryForm";
 
-
-function QuickEntryExit({ type }){
+function QuickEntryExit({ type }) {
 	const { id } = useParams();
 	const navigate = useNavigate();
 
-	const handleQuickAction = async () =>{
-		try{
+	const handleQuickAction = async () => {
+		try {
 			const userDoc = await getDoc(doc(db, 'frequentUsers', id));
-			if (userDoc.exists()){
+			if (userDoc.exists()) {
 				const userData = userDoc.data();
 				let currentTime = new Date();
 				const localTime = new Date(currentTime.getTime() - 7 * 60 * 60 * 1000); // Subtract 7 hours (in milliseconds)
-				const entryTime = localTime.toISOString().slice(0, 16).replace('T', ' ');
+				const entryTime = localTime.toISOString().replace('T', ' ').slice(0, 19); // Keep the format YYYY-MM-DD HH:MM:SS
 
 				const entryID = entryTime;
-				if (type === 'entrada'){
-					await setDoc(doc(db, 'entries', entryID),{
-						name: userData.name,
-						reason: 'Acceso rapido',
-						entryTime: entryTime,
-						dentro: true
-					});
-
-				}else if (type === 'salida') {
+				if (type === 'salida') {
 					const q = query(collection(db, "entries"), where("name", "==", userData.name), where("dentro", "==", true));
 					const querySnapshot = await getDocs(q);
 					if (!querySnapshot.empty) {
@@ -48,21 +40,21 @@ function QuickEntryExit({ type }){
 				}
 				alert(`Registro de ${type} exitoso para ${userData.name}`);
 				navigate('/');
-			}else {
+			} else {
 				alert('Usuario no encontrado');
 				navigate('/');
 			}
-		}catch(e){
+		} catch (e) {
 			console.error(`Error en registro de ${type}: `, e);
-		};
-	}
+		}
+	};
+
 	useEffect(() => {
 		handleQuickAction();
 	}, []);
 
 	return null;
 }
-
 
 function App() {
 	const [entries, setEntries] = useState([]);
@@ -89,14 +81,13 @@ function App() {
 
 	return (
 		<Router>
-
 			<Navbar />
 			<div className="App">
 				<Routes>
 					<Route path="/" element={<Home />} />
 					<Route path="/Registro" element={<EntryForm />} />
 					<Route path="/Salidas" element={<ExitForm entries={entries} fetchEntries={fetchEntries} />} />
-					<Route path="/entrada/:id" element={<QuickEntryExit type="entrada" />} />
+					<Route path="/entrada/:id" element={<QuickEntryForm />} />
 					<Route path="/salida/:id" element={<QuickEntryExit type="salida" />} />
 					<Route path="/frequent-users" element={<FrequentUserForm />} />
 					<Route path="/dashboard" element={<Dashboard />} />

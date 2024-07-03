@@ -1,18 +1,53 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../firebase';
 import { doc, setDoc, collection, getDocs } from "firebase/firestore";
-import { TextField, Button, Container, Typography, Box, Avatar, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel, Select, MenuItem } from '@mui/material';
+import {
+    TextField,
+    Button,
+    Container,
+    Typography,
+    Box,
+    Avatar,
+    Radio,
+    RadioGroup,
+    FormControlLabel,
+    FormControl,
+    FormLabel,
+    Select,
+    MenuItem,
+    InputLabel
+} from '@mui/material';
 import { Link } from 'react-router-dom';
 import imagen from '../rataentry.png';
 
 const EntryForm = ({ fetchEntries }) => {
     const [name, setName] = useState('');
     const [reason, setReason] = useState('');
+    const [otherReason, setOtherReason] = useState('');
     const [code, setCode] = useState('');
     const [isMember, setIsMember] = useState(false);
     const [frequentUsers, setFrequentUsers] = useState([]);
     const [selectedUser, setSelectedUser] = useState('');
     const [room, setRoom] = useState('');
+
+    const reasons = [
+        "Bioterio",
+        "Experimento",
+        "Investigación",
+        "Sala de enseñanza",
+        "Servicio social",
+        "Técnico Académico",
+        "Visita general",
+        "Práctica",
+        "Otro"
+    ];
+
+    const rooms = [
+        "Bioterio",
+        "Sala de enseñanza",
+        "Administración",
+        "Sala de experimentación"
+    ];
 
     useEffect(() => {
         const fetchFrequentUsers = async () => {
@@ -35,12 +70,12 @@ const EntryForm = ({ fetchEntries }) => {
         e.preventDefault();
         let currentTime = new Date();
         const localTime = new Date(currentTime.getTime() - 7 * 60 * 60 * 1000); // Subtract 7 hours (in milliseconds)
-        const entryTime = localTime.toISOString().slice(0, 16).replace('T', ' ');
+        const entryTime = localTime.toISOString().slice(0, 19).replace('T', ' ');
 
         const id = entryTime; // Genera un ID basado en la fecha actual en formato ISO
         const dentro = true;
         const entryName = isMember ? selectedUser : (name || code);
-        const entryReason = isMember ? 'Acceso rápido' : reason;
+        const entryReason = reason === "Otro" ? otherReason : reason;
 
         try {
             await setDoc(doc(db, 'entries', id), {
@@ -53,6 +88,7 @@ const EntryForm = ({ fetchEntries }) => {
             alert('Entrada registrada exitosamente\nNo olvides registrar tu salida!');
             setName('');
             setReason('');
+            setOtherReason('');
             setCode('');
             setSelectedUser('');
             setRoom('');
@@ -95,7 +131,9 @@ const EntryForm = ({ fetchEntries }) => {
                 </FormControl>
                 {isMember ? (
                     <FormControl fullWidth variant="outlined" sx={{ mt: 2 }}>
+                        <InputLabel id="selectedUser-label">Seleccione su nombre</InputLabel>
                         <Select
+                            labelId="selectedUser-label"
                             value={selectedUser}
                             onChange={(e) => setSelectedUser(e.target.value)}
                             displayEmpty
@@ -121,30 +159,51 @@ const EntryForm = ({ fetchEntries }) => {
                         onChange={(e) => setName(e.target.value)}
                     />
                 )}
-                {!isMember && (
+                <FormControl fullWidth sx={{ mt: 2 }}>
+                    <InputLabel id="reason-label">Razón de Entrada</InputLabel>
+                    <Select
+                        labelId="reason-label"
+                        id="reason"
+                        value={reason}
+                        onChange={(e) => setReason(e.target.value)}
+                        displayEmpty
+                    >
+                        {reasons.map((reason) => (
+                            <MenuItem key={reason} value={reason}>
+                                {reason}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+                {reason === "Otro" && (
                     <TextField
                         variant="outlined"
                         margin="normal"
                         required
                         fullWidth
-                        name="reason"
-                        label="Razón de Entrada"
+                        name="otherReason"
+                        label="Especifique la razón"
                         type="text"
-                        id="reason"
-                        autoComplete="reason"
-                        value={reason}
-                        onChange={(e) => setReason(e.target.value)}
+                        id="otherReason"
+                        autoComplete="otherReason"
+                        value={otherReason}
+                        onChange={(e) => setOtherReason(e.target.value)}
                     />
                 )}
                 <FormControl fullWidth variant="outlined" sx={{ mt: 2 }}>
+                    <InputLabel id="room-label">Seleccione la sala</InputLabel>
                     <Select
+                        labelId="room-label"
                         value={room}
                         onChange={(e) => setRoom(e.target.value)}
                         displayEmpty
                     >
                         <MenuItem value="" disabled>Seleccione la sala</MenuItem>
-                        <MenuItem value="sala1">Sala 1</MenuItem>
-                        <MenuItem value="sala2">Sala 2</MenuItem>
+                        {rooms.map((room) => (
+                            <MenuItem key={room} value={room}>
+                                {room}
+                            </MenuItem>
+                        ))}
                     </Select>
                 </FormControl>
                 <Button

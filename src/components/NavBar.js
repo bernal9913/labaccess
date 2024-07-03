@@ -73,9 +73,7 @@ const Navbar = () => {
                     <Box sx={{ display: { xs: 'none', md: 'block' } }}>
                         <Button color="inherit" component={Link} to="/">Inicio</Button>
                         <Button color="inherit" component={Link} to="/about">Sobre nosotros</Button>
-                        <Button color="inherit" component={Link} to="/dashboard">Dashboard</Button>
                         <Button color="inherit" component={Link} to="/Registro">Registro de Entrada visitantes</Button>
-                        <Button color="inherit" component={Link} to="/frequent-users">Usuarios Frecuentes</Button>
                         <Button color="inherit" component={Link} to="/Salidas">Registro de Salida visitantes</Button>
                     </Box>
                 </Toolbar>

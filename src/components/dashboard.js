@@ -6,6 +6,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import { Button } from '@mui/material';
 import { Box, CircularProgress, Typography } from '@mui/material';
 import hamsterRunning from '../chinchilla-on-wheel-running.gif';
+import {CopyToClipboard} from "react-copy-to-clipboard/src";
 
 const Dashboard = () => {
 	const [entries, setEntries] = useState([]);
@@ -111,22 +112,26 @@ const Dashboard = () => {
 			width: 750,
 			renderCell: (params) => (
 				<>
-					<Button
-						variant="contained"
-						color="primary"
-						onClick={() => handleCopyLink('entrada', params.row.id)}
-						style={{ marginRight: '10px' }}
-					>
-						Copiar Enlace de Entrada
-					</Button>
-					<Button
-						variant="contained"
-						color="secondary"
-						onClick={() => handleCopyLink('salida', params.row.id)}
-						style={{ marginRight: '10px' }}
-					>
-						Copiar Enlace de Salida
-					</Button>
+					<CopyToClipboard text={`https://animal-crossing-4c5da.web.app/entrada/${params.row.id}`}>
+						<Button
+							variant="contained"
+							color="primary"
+							style={{ marginRight: '10px' }}
+							onClick={() => handleCopyLink('entrada', params.row.id)}
+						>
+							Copiar Enlace de Entrada
+						</Button>
+					</CopyToClipboard>
+					<CopyToClipboard text={`https://animal-crossing-4c5da.web.app/salida/${params.row.id}`}>
+						<Button
+							variant="contained"
+							color="secondary"
+							style={{ marginRight: '10px' }}
+							onClick={() => handleCopyLink('salida', params.row.id)}
+						>
+							Copiar Enlace de Salida
+						</Button>
+					</CopyToClipboard>
 					<Button
 						variant="contained"
 						color="error"
@@ -138,7 +143,6 @@ const Dashboard = () => {
 			)
 		}
 	];
-
 	return (
 		<div style={{ padding: '20px' }}>
 			<h1>Dashboard</h1>

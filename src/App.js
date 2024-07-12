@@ -5,9 +5,9 @@ import { collection, getDocs, query, where, doc, updateDoc, getDoc, setDoc } fro
 import { BrowserRouter as Router, Routes, Route, useParams, useNavigate } from 'react-router-dom';
 import EntryForm from './components/EntryForm';
 import ExitForm from './components/ExitForm';
-import Home from './components/Home';
+import Home from './components/home';
 import FrequentUserForm from "./components/FrequentUserForm";
-import Dashboard from "./components/Dashboard";
+import Dashboard from "./components/dashboard";
 import About from "./components/About";
 import Navbar from "./components/NavBar";
 import NotFound from "./components/NotFound";

@@ -59,7 +59,7 @@ const Navbar = () => {
                 <Toolbar>
                     <img src={logo} alt="Logo" style={{ marginRight: '10px', width: '40px', height: '40px' }} />
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        Laboratorio de Análisis Experimental de la Conducta.
+                        Laboratorio de Análisis Experimental de la Conducta
                     </Typography>
                     <IconButton
                         color="inherit"

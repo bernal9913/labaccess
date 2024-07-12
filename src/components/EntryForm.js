@@ -31,14 +31,12 @@ const EntryForm = ({ fetchEntries }) => {
     const [room, setRoom] = useState('');
 
     const reasons = [
-        "Bioterio",
         "Experimento",
         "Investigación",
-        "Sala de enseñanza",
+        "Práctica",
         "Servicio social",
         "Técnico Académico",
         "Visita general",
-        "Práctica",
         "Otro"
     ];
 

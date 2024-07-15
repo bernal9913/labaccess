@@ -1,0 +1,76 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.member {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.member img {
+    border-radius: 50%;
+    margin-right: 20px;
+    width: 150px;
+}
+
+.member-info {
+    max-width: 600px;
+}
+
+.member-info h3 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.member-info p {
+    margin: 5px 0;
+}
+
+.other-members {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+
+.other-member {
+    text-align: center;
+    margin-bottom: 20px;
+    width: 30%;
+}
+
+.other-member img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}
+
+.other-member p {
+    margin: 10px 0 0;
+    font-size: 0.9em;
+}
+
+.lab-fun {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.lab-fun img {
+    width: 30%;
+    margin: 10px;
+}

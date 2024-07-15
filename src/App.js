@@ -12,6 +12,7 @@ import About from "./components/About";
 import Navbar from "./components/NavBar";
 import NotFound from "./components/NotFound";
 import QuickEntryForm from "./components/QuickEntryForm";
+import LabMembers from "./components/LabMembers";
 
 function QuickEntryExit({ type }) {
 	const { id } = useParams();
@@ -92,6 +93,7 @@ function App() {
 					<Route path="/frequent-users" element={<FrequentUserForm />} />
 					<Route path="/dashboard" element={<Dashboard />} />
 					<Route path="/about" element={<About />} />
+					<Route path="/lab" element={<LabMembers />} />
 					<Route path="*" element={<NotFound />} /> {/* Ruta 404 */}
 				</Routes>
 			</div>

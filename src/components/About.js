@@ -1,8 +1,8 @@
 import React from 'react';
 import '../About.css';
-import estefyImage from '../assets/estefy.jpg';
-import carlosImage from '../assets/carlos.jpg';
-import desiderioImage from '../assets/desiderio.jpg';
+import estefyImage from '../assets/members/estefy.jpg';
+import carlosImage from '../assets/members/carlos.jpg';
+import desiderioImage from '../assets/members/desiderio.jpg';
 
 const About = () => {
 	return (

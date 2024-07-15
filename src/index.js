@@ -9,6 +9,7 @@ import Home from './components/home';
 import FrequentUserForm from "./components/FrequentUserForm";
 import Dashboard from "./components/dashboard";
 import About from "./components/About";
+import LabMembers from "./components/LabMembers";
 
 const router = createBrowserRouter([
     { path: "/", element: <Home /> },
@@ -16,7 +17,8 @@ const router = createBrowserRouter([
     { path: "/Salidas", element: <ExitForm /> },
     { path: "/frequent-users", element: <FrequentUserForm/>},
     { path: "/dashboard", element: <Dashboard /> },
-    { path: "/about", element: <About /> }
+    { path: "/about", element: <About /> },
+    { path: "/lab", element: <LabMembers /> },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

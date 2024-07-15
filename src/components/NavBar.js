@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from "../ESCUDO-COLOR.png";
+import logo from "../assets/commons/escudo.png";
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';

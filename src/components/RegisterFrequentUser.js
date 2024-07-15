@@ -1,6 +1,6 @@
 // src/components/RegisterFrequentUser.js
 import React, { useState } from 'react';
-import { db } from '../firebase';
+import { db } from '../apis/firebase';
 
 const RegisterFrequentUser = () => {
     const [name, setName] = useState('');

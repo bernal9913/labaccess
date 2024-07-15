@@ -1,5 +1,5 @@
 import React from 'react';
-import '../About.css';
+import '../styles/About.css';
 import estefyImage from '../assets/members/estefy.jpg';
 import carlosImage from '../assets/members/carlos.jpg';
 import desiderioImage from '../assets/members/desiderio.jpg';

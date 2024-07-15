@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { db } from '../firebase';
+import { db } from '../apis/firebase';
 import { TextField, Button, Container, Typography, Box, Avatar } from '@mui/material';
-import imagen from '../ratafrequent.png';
+import imagen from '../assets/commons/ratafrequent.png';
 import { collection, addDoc } from "firebase/firestore";
 
 const FrequentUserForm = () => {

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-import remmysad from '../ratatouille-sad.gif'; // Asegúrate de tener el GIF en la carpeta correcta
+import remmysad from '../assets/commons/ratatouille-sad.gif'; // Asegúrate de tener el GIF en la carpeta correcta
 
 const NotFound = () => {
 	return (

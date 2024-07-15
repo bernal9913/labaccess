@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { db } from '../firebase';
+import { db } from '../apis/firebase';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { Button, TextField, FormControl, InputLabel, Select, MenuItem, Container, Typography, Box, CircularProgress, Paper } from '@mui/material';
 import { styled } from '@mui/system';

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { db } from '../firebase';
+import { db } from '../apis/firebase';
 import { doc, setDoc, collection, getDocs } from "firebase/firestore";
 import {
     TextField,
@@ -18,7 +18,7 @@ import {
     InputLabel
 } from '@mui/material';
 import { Link } from 'react-router-dom';
-import imagen from '../rataentry.png';
+import imagen from '../assets/commons/rataentry.png';
 
 const EntryForm = ({ fetchEntries }) => {
     const [name, setName] = useState('');

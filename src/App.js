@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import './App.css';
-import { db } from './firebase';
+import './styles/App.css';
+import { db } from './apis/firebase';
 import { collection, getDocs, query, where, doc, updateDoc, getDoc, setDoc } from "firebase/firestore";
 import { BrowserRouter as Router, Routes, Route, useParams, useNavigate } from 'react-router-dom';
 import EntryForm from './components/EntryForm';

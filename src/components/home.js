@@ -1,7 +1,7 @@
 import React from 'react';
-import logo from "../ESCUDO-COLOR.png";
-import imagen from '../rataestudio.png';
-import imagen2 from '../servicio.png';
+import logo from "../assets/commons/escudo.png";
+import imagen from '../assets/commons/rataestudio.png';
+import imagen2 from '../assets/commons/servicio.png';
 import { Container, Typography, Avatar, Box } from '@mui/material';
 
 const home = () => {

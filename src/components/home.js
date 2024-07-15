@@ -60,11 +60,6 @@ const home = () => {
                 }} sx={{ mt: 2 }} />
           </Box>
         </Container>
-        <Box component="footer" sx={{ padding: 2, textAlign: 'center', backgroundColor: '#3f51b5', color: '#fff', marginTop: 4 }}>
-          <Typography variant="body2">
-            &copy; 2024 Universidad de Sonora. Todos los derechos reservados.
-          </Typography>
-        </Box>
       </Box>
     );
   }

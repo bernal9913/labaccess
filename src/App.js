@@ -13,6 +13,7 @@ import Navbar from "./components/NavBar";
 import NotFound from "./components/NotFound";
 import QuickEntryForm from "./components/QuickEntryForm";
 import LabMembers from "./components/LabMembers";
+import {Box, Typography} from "@mui/material";
 
 function QuickEntryExit({ type }) {
 	const { id } = useParams();
@@ -97,6 +98,11 @@ function App() {
 					<Route path="*" element={<NotFound />} /> {/* Ruta 404 */}
 				</Routes>
 			</div>
+			<Box component="footer" sx={{ padding: 2, textAlign: 'center', backgroundColor: '#3f51b5', color: '#fff', marginTop: 4 }}>
+				<Typography variant="body2">
+					&copy; 2024 Universidad de Sonora. Todos los derechos reservados.
+				</Typography>
+			</Box>
 		</Router>
 	);
 }

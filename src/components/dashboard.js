@@ -63,7 +63,7 @@ const Dashboard = () => {
 	};
 
 	const handleCopyLink = (type, id) => {
-		const baseUrl = "https://animal-crossing-4c5da.web.app";
+		const baseUrl = "https://laboratorio--aec.web.app";
 		const url = `${baseUrl}/${type}/${id}`;
 		setCopiedText(url);
 	};
@@ -112,7 +112,7 @@ const Dashboard = () => {
 			width: 750,
 			renderCell: (params) => (
 				<>
-					<CopyToClipboard text={`https://animal-crossing-4c5da.web.app/entrada/${params.row.id}`}>
+					<CopyToClipboard text={`https://laboratorio--aec.web.app/entrada/${params.row.id}`}>
 						<Button
 							variant="contained"
 							color="primary"
@@ -122,7 +122,7 @@ const Dashboard = () => {
 							Copiar Enlace de Entrada
 						</Button>
 					</CopyToClipboard>
-					<CopyToClipboard text={`https://animal-crossing-4c5da.web.app/salida/${params.row.id}`}>
+					<CopyToClipboard text={`https://laboratorio--aec.web.app/salida/${params.row.id}`}>
 						<Button
 							variant="contained"
 							color="secondary"

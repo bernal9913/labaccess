@@ -1,4 +1,3 @@
-// src/components/RegisterFrequentUser.js
 import React, { useState } from 'react';
 import { db } from '../apis/firebase';
 

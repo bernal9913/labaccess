@@ -136,7 +136,6 @@ const EntryForm = ({ fetchEntries }) => {
                             onChange={(e) => setSelectedUser(e.target.value)}
                             displayEmpty
                         >
-                            <MenuItem value="" disabled>Seleccione su nombre</MenuItem>
                             {frequentUsers.map((user) => (
                                 <MenuItem key={user.id} value={user.name}>{user.name}</MenuItem>
                             ))}
@@ -196,7 +195,6 @@ const EntryForm = ({ fetchEntries }) => {
                         onChange={(e) => setRoom(e.target.value)}
                         displayEmpty
                     >
-                        <MenuItem value="" disabled>Seleccione la sala</MenuItem>
                         {rooms.map((room) => (
                             <MenuItem key={room} value={room}>
                                 {room}

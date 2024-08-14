@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/lab.css';
+import { db } from '../apis/firebase';
+import { collection, getDocs, query } from "firebase/firestore";
 import estefyImage from '../assets/members/estefy.jpg';
 import carlosImage from '../assets/members/carlos.jpg';
 import desiderioImage from '../assets/members/desiderio.jpg';
+import yisusImage from '../assets/members/yisus.png';
 import kennethImage from '../assets/members/kenethtest.jpeg';
 import raton1 from "../assets/members/raton1.jpg";
 import raton2 from "../assets/members/raton2.jpg";
@@ -11,6 +14,10 @@ import raton3 from "../assets/members/raton3.webp"
 import ofimg1 from '../assets/ourfun/img1.png';
 import ofimg2 from '../assets/ourfun/img2.png';
 import ofimg3 from '../assets/ourfun/img3.png';
+
+let img = '../assets/members/'
+let ofi = '../assets/ourfun/'
+
 const labMembers = [
 	{
 		name: "Kenneth Madrigal",
@@ -39,9 +46,17 @@ const labMembers = [
 		description: "Encargado de testing y diseño",
 		image: desiderioImage,
 		link: "https://www.youtube.com/watch?v=ARWg160eaX4"
+	},
+	{
+		name: "Jesus Juarez",
+		role: "prestador de servicio social",
+		description: "Asistente de programacion",
+		image: yisusImage,
+		link: "https://www.youtube.com/watch?v=OIBODIPC_8Y"
 	}
 	// Add other members similarly
 ];
+
 const otherMembers = [
 	{
 		name: "Liz Brown",
@@ -63,22 +78,42 @@ const otherMembers = [
 
 
 const LabMembers = () => {
+	const [labMembers, setLabMembers] = useState([]);
+
+	const fetchLabMembers = async () => {
+		const q = query(collection(db, "labMembers"));
+		try {
+			const querySnapshot = await getDocs(q);
+			const membersArray = [];
+			querySnapshot.forEach((doc) => {
+				membersArray.push({ id: doc.id, ...doc.data() });
+			});
+			setLabMembers(membersArray);
+		} catch (error) {
+			console.error('Error fetching entries:', error);
+		}
+	};
+
+	useEffect(() => {
+		fetchLabMembers();
+	}, []);
+
 	return (
 		<div className="container">
 			<div className="header">
 				<h1>Miembros del laboratorio</h1>
-		</div>
-		{labMembers.map((member, index) => (
-			<div className="member" key={index}>
-				<a href={member.link} target="_blank" rel="noopener noreferrer">
-					<img src={member.image} alt={member.name} />
-				</a>
-				<div className="member-info">
-					<h3>{member.name}, {member.role}</h3>
-					<p>{member.description}</p>
-				</div>
 			</div>
-		))}
+			{labMembers.map((member, index) => (
+				<div className="member" key={index}>
+					<a href={member.link} target="_blank" rel="noopener noreferrer">
+						<img src={require(`../assets/members/${member.image}`)} alt={member.name} />
+					</a>
+					<div className="member-info">
+						<h3>{member.name}, {member.role}</h3>
+						<p>{member.description}</p>
+					</div>
+				</div>
+			))}
 			<div className="other-members">
 				{otherMembers.map((member, index) => (
 					<div className="other-member" key={index}>
@@ -86,8 +121,8 @@ const LabMembers = () => {
 						<p>{member.name}</p>
 						<p>{member.role}</p>
 					</div>
-		))}
-		</div>
+				))}
+			</div>
 			<div className="lab-fun">
 				<h2>Actividades del laboratorio</h2>
 				<img src={ofimg1} alt="Lab fun 1" />

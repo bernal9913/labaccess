@@ -3,6 +3,7 @@ import '../styles/About.css';
 import estefyImage from '../assets/members/estefy.jpg';
 import carlosImage from '../assets/members/carlos.jpg';
 import desiderioImage from '../assets/members/desiderio.jpg';
+import yisusImage from '../assets/members/yisus.png'
 
 const About = () => {
 	return (
@@ -38,6 +39,15 @@ const About = () => {
 					<h3>Rene Antunez</h3>
 					<p className="member-description">
 						Encargado de testing y diseño
+					</p>
+				</div>
+				<div className="team-member">
+					<a href="https://www.youtube.com/watch?v=OIBODIPC_8Y" target="_blank" rel="noopener noreferrer">
+						<img src={yisusImage} alt="Jesus" className="team-image"/>
+					</a>
+					<h3>Jesus Juarez</h3>
+					<p className="member-description">
+						Asistente de programación
 					</p>
 				</div>
 			</div>

@@ -13,6 +13,7 @@ import Navbar from "./components/NavBar";
 import NotFound from "./components/NotFound";
 import QuickEntryForm from "./components/QuickEntryForm";
 import LabMembers from "./components/LabMembers";
+import EditLabMembers from "./components/EditLabMembers"
 import {Box, Typography} from "@mui/material";
 
 function QuickEntryExit({ type }) {
@@ -95,6 +96,7 @@ function App() {
 					<Route path="/dashboard" element={<Dashboard />} />
 					<Route path="/about" element={<About />} />
 					<Route path="/lab" element={<LabMembers />} />
+					<Route path="/labedit" element={<EditLabMembers />} />
 					<Route path="*" element={<NotFound />} /> {/* Ruta 404 */}
 				</Routes>
 			</div>

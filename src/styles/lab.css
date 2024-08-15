@@ -74,3 +74,25 @@ body {
     width: 30%;
     margin: 10px;
 }
+
+.image {
+    position: relative;
+    width: 300px;
+    margin: 0px auto;
+}
+
+.image .delete {
+    background-color: red;
+    width: 20px;
+    padding: 10px;
+    color: white;
+    display: none;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.image:hover .delete {
+    display: block;
+}

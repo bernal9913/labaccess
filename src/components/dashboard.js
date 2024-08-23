@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { db } from '../apis/firebase';
 import { CSVLink } from "react-csv";
-import { collection, getDocs, query, where, deleteDoc, doc } from "firebase/firestore";
+import { collection, getDocs, query, deleteDoc, doc } from "firebase/firestore";
 import { DataGrid } from '@mui/x-data-grid';
 import { Button } from '@mui/material';
-import { Box, CircularProgress, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import hamsterRunning from '../assets/commons/loading-rat.gif';
 import {CopyToClipboard} from "react-copy-to-clipboard/src";
 
@@ -87,11 +87,6 @@ const Dashboard = () => {
 		{ label: "Sala", key: "room" }
 	];
 
-	const userHeaders = [
-		{ label: "ID", key: "id" },
-		{ label: "Nombre", key: "name" },
-		{ label: "Cargo", key: "role" }
-	];
 
 	const columnsEntries = [
 		{ field: 'id', headerName: 'ID', width: 150 },

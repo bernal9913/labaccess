@@ -64,7 +64,7 @@ const EditLabMembers = () => {
 		if (imageUpload) {
 			const imageRef = ref(storage, `members/${imageUpload.name}`);
 			const snapshot = await uploadBytes(imageRef, imageUpload);
-			imageUrl = await getDownloadURL(snapshot.ref);
+
 		}
 
 		const updatedFormData = { ...formData, image: imageUpload.name };

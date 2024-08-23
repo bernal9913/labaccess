@@ -4,10 +4,6 @@ import { db, storage } from '../apis/firebase'; // Importar storage
 import { collection, getDocs, query } from "firebase/firestore";
 import { ref, getDownloadURL } from "firebase/storage"; // Importar métodos para obtener imágenes de storage
 
-import raton1 from "../assets/members/raton1.jpg";
-import raton2 from "../assets/members/raton2.jpg";
-import raton3 from "../assets/members/raton3.webp"
-
 import ofimg1 from '../assets/ourfun/img1.png';
 import ofimg2 from '../assets/ourfun/img2.png';
 import ofimg3 from '../assets/ourfun/img3.png';
@@ -15,24 +11,6 @@ import ofimg3 from '../assets/ourfun/img3.png';
 const LabMembers = () => {
 	const [labMembers, setLabMembers] = useState([]);
 
-	const otherMembers = [
-		{
-			name: "Liz Brown",
-			role: "Undergraduate Student, EAB Lab",
-			image: raton1
-		},
-		{
-			name: "Lindsey DeWeerd",
-			role: "Undergraduate Student, EAB/HOP Labs",
-			image: raton2
-		},
-		{
-			name: "Emily Gloede",
-			role: "Undergraduate Student, EAB Lab",
-			image: raton3
-		},
-		// Add other members similarly
-	];
 
 	const fetchLabMembers = async () => {
 		const q = query(collection(db, "labMembers"));
@@ -63,7 +41,7 @@ const LabMembers = () => {
 	return (
 		<div className="container">
 			<div className="header">
-				<h1>Miembros del laboratorio</h1>
+				<h1 >Miembros del laboratorio</h1>
 			</div>
 			{labMembers.map((member, index) => (
 				<div className="member" key={index}>

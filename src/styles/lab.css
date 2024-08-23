@@ -11,7 +11,7 @@ body {
 }
 
 .header {
-    color: white;
+    color: black;
     padding: 20px;
     text-align: center;
 }
@@ -95,4 +95,7 @@ body {
 
 .image:hover .delete {
     display: block;
+}
+.h1{
+    color: black;
 }

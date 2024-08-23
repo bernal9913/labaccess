@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { db } from '../apis/firebase';
 import { doc, updateDoc } from "firebase/firestore";
-import { Button, Card, CardContent, Typography, List, ListItem, ListItemText, Avatar, CircularProgress, Box } from '@mui/material';
+import { Button, Card, CardContent, Typography, List, ListItem, ListItemText, Avatar, Box } from '@mui/material';
 import imagen from '../assets/commons/ratauser.png';
 import hamsterRunning from '../assets/commons/loading-rat.gif';
 
